@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsnafB2B v5.0 | Bölgesel Depo Bakkal ve Dijital Kooperatif Platformu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        /* Custom scrollbar for mobile frame */
+        .mobile-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .mobile-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .mobile-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        @keyframes scanLine {
+            0% { top: 8%; }
+            50% { top: 88%; }
+            100% { top: 8%; }
+        }
+        .scanner-laser {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #10b981, #34d399, #10b981, transparent);
+            box-shadow: 0 0 12px #10b981;
+            animation: scanLine 2.2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-600 selection:text-white">
+
+    <!-- TOP COMPETITION DEMO BANNER -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                    v5.0 Canlı MVP Prototipi
+                </span>
+                <span class="font-medium text-slate-300">
+                    GençBizz • GençBizzTech • TÜBİTAK 2204-A/D • TEKNOFEST • Diamond Challenge Jüri Sunum Modu
+                </span>
+            </div>
+            <div class="flex items-center gap-4 text-[11px] text-slate-400">
+                <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> Pilot: Atatürk Fen Lisesi & Kadıköy 4 Bölge</span>
+                <span class="hidden sm:inline-flex items-center gap-1 text-emerald-400 font-semibold"><i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> %19.3 Net Maliyet Tasarrufu</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY NAVIGATION BAR WITH 4-VIEW SWITCHER -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3 gap-3">
+                <!-- Brand Logo -->
+                <div class="flex items-center justify-between">
+                    <button onclick="switchView('landing')" class="flex items-center gap-3 text-left group focus:outline-none">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-600 to-slate-900 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+                            <i data-lucide="boxes" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xl font-black tracking-tight text-slate-900">Esnaf<span class="text-sky-600">B2B</span></span>
+                                <span class="text-[10px] font-bold uppercase px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-md">Gel-Al v5.0</span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">Yerel Esnaf Dijital Kooperatifi & Bölgesel Depo Ağı</p>
+                        </div>
+                    </button>
+
+                    <!-- Quick Cart Badge on Mobile -->
+                    <button onclick="switchView('bakkal')" class="lg:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-50 text-sky-700 font-semibold text-xs border border-sky-200">
+                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        <span id="mobileNavCartCount">12 Koli</span>
+                    </button>
+                </div>
+
+                <!-- 4 Role Switcher Pills -->
+                <nav class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200" aria-label="Görünüm Seçici">
+                    <button onclick="switchView('landing')" id="tab-landing" class="view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm">
+                        <i data-lucide="globe" class="w-4 h-4 text-sky-600"></i>
+                        <span>1. Web & Tanıtım</span>
+                    </button>
+                    <button onclick="switchView('bakkal')" id="tab-bakkal" class="view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+                        <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+                        <span>2. Üye Bakkal App</span>
+                        <span id="navBadgeCart" class="ml-0.5 px-1.5 py-0.2 bg-emerald-600 text-white rounded-full text-[10px]">12</span>
+                    </button>
+                    <button onclick="switchView('depo')" id="tab-depo" class="view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+                        <i data-lucide="warehouse" class="w-4 h-4 text-amber-600"></i>
+                        <span>3. Depo Bakkal (%1.5)</span>
+                        <span id="navBadgeQueue" class="ml-0.5 px-1.5 py-0.2 bg-amber-500 text-white rounded-full text-[10px]">3</span>
+                    </button>
+                    <button onclick="switchView('uretici')" id="tab-uretici" class="view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 text-indigo-600"></i>
+                        <span>4. Üretici Panosu</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- ===================================================================== -->
+        <!-- VIEW 1: WEB SİTESİ & TANITIM (LANDING PAGE)                           -->
+        <!-- ===================================================================== -->
+        <section id="view-landing" class="space-y-16 pb-20">
+            
+            <!-- Hero Section -->
+            <div class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white pt-12 pb-20 border-b border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <!-- Key Pill Badges -->
+                    <div class="flex flex-wrap items-center gap-2 mb-6">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            <i data-lucide="trending-down" class="w-3.5 h-3.5"></i> %19.3 Net Maliyet Avantajı
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Sıfır Kargo Riski (Gel-Al Modeli)
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                            <i data-lucide="percent" class="w-3.5 h-3.5"></i> %0 Distribütör Makası
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                            <i data-lucide="map" class="w-3.5 h-3.5"></i> Kadıköy 4 Bölge Pilotu
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                                Mahalle Bakkalına <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400">Tır Bazlı</span> Satın Alma Gücü.
+                            </h1>
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                                Zincir market oligopollerine karşı bağımsız mahalle esnafını dijital bir kooperatifte birleştiriyoruz. Pahalı "Son Kilometre" kargo dağıtımını kaldırdık; ilçeyi <strong>4 Bölge Depo Bakkalına</strong> ayırdık. Tır doğrudan mahalledeki Depo Bakkala iner, üye bakkal <strong>10 dakikada kendi imkanıyla (Gel-Al)</strong> malını teslim alır.
+                            </p>
+
+                            <div class="flex flex-wrap items-center gap-4 pt-2">
+                                <button onclick="switchView('bakkal')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-sky-500/25 transition">
+                                    <i data-lucide="smartphone" class="w-5 h-5"></i>
+                                    Üye Bakkal Uygulamasını Dene
+                                </button>
+                                <button onclick="switchView('depo')" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 transition">
+                                    <i data-lucide="warehouse" class="w-5 h-5 text-amber-400"></i>
+                                    Depo Bakkal Paneli (%1.5 Komisyon)
+                                </button>
+                            </div>
+
+                            <!-- Core Proof Metrics -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-800">
+                                <div>
+                                    <div class="text-2xl font-black text-emerald-400">%19.3</div>
+                                    <div class="text-xs text-slate-400">Birim Maliyet Tasarrufu</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-black text-amber-400">%1.5</div>
+                                    <div class="text-xs text-slate-400">Depo Bakkal Komisyonu</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-black text-sky-400">4 Bölge</div>
+                                    <div class="text-xs text-slate-400">100 Bakkal Yerine 4 Durak</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-black text-purple-400">0 TL</div>
+                                    <div class="text-xs text-slate-400">Stok ve Kargo Riski</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Hero Card: Live System Architecture Snapshot -->
+                        <div class="lg:col-span-5">
+                            <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-5">
+                                <div class="flex items-center justify-between border-b border-slate-700 pb-4">
+                                    <div>
+                                        <span class="text-xs uppercase tracking-wider font-bold text-sky-400">Kadıköy Canlı Havuz Durumu</span>
+                                        <h3 class="text-lg font-bold text-white">Bölgesel Toplu Alım Simülasyonu</h3>
+                                    </div>
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Aktif
+                                    </span>
+                                </div>
+
+                                <!-- 4 Zones Live Mini Status -->
+                                <div class="space-y-3 text-xs">
+                                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold text-white">1. Moda – Caferağa Bölgesi</div>
+                                            <div class="text-slate-400">Depo: Moda Merkez Bakkal • 28 Üye Bakkal</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-extrabold text-emerald-400">860 / 1000 Koli</div>
+                                            <div class="text-[11px] text-slate-400">%86 Tır Kotası</div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold text-white">2. Fenerbahçe – Göztepe Bölgesi</div>
+                                            <div class="text-slate-400">Depo: Göztepe Yıldız Market • 24 Üye Bakkal</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-extrabold text-sky-400">920 / 1000 Koli</div>
+                                            <div class="text-[11px] text-slate-400">%92 Tır Kotası</div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold text-white">3. Kozyatağı – Bostancı Bölgesi</div>
+                                            <div class="text-slate-400">Depo: Bostancı Çınar Bakkal • 31 Üye Bakkal</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-extrabold text-amber-400">1.040 / 1000 Koli</div>
+                                            <div class="text-[11px] text-emerald-400 font-semibold">Sevkiyata Hazır!</div>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-700/80 flex items-center justify-between">
+                                        <div>
+                                            <div class="font-bold text-white">4. Fikirtepe – Hasanpaşa Bölgesi</div>
+                                            <div class="text-slate-400">Depo: Hasanpaşa Bereket Gıda • 19 Üye Bakkal</div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="font-extrabold text-purple-400">640 / 1000 Koli</div>
+                                            <div class="text-[11px] text-slate-400">%64 Tır Kotası</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-sky-500/10 border border-sky-500/30 rounded-xl p-3.5 text-xs text-sky-200 flex items-start gap-2.5">
+                                    <i data-lucide="info" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                                    <span><strong>Jüri İpucu:</strong> "2. Üye Bakkal App" sekmesinden sipariş verdiğinizde bu kotanın canlı arttığını ve "3. Depo Bakkal" sekmesine Gel-Al QR fişinin düştüğünü deneyimleyebilirsiniz.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive 3-Step Visual Diagram: Bölgesel Gel-Al Modeli Nasıl Çalışır? -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-sky-600">Sıfır Kargo Riski • Esnaf-Esnafa Dayanışma</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">Bölgesel Depo Bakkal ve "Gel-Al" Modeli Nasıl Çalışır?</h2>
+                    <p class="text-sm text-slate-600 mt-2">
+                        Perakendede operasyon maliyetinin %53'ünü oluşturan "Son Kilometre" kargo dağıtımını tamamen kaldırdık. Sistem dış lojistik firmalarına bağımlı olmadan 3 adımda mahalle içinde döner:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Step 1 -->
+                    <div class="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-sky-500 transition shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-black text-lg">1</span>
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200">Negatif İşletme Sermayesi</span>
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-900 mb-2">Dijital Havuzda Sipariş & Toplu Alım</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Bölgedeki bakkallar EsnafB2B mobil uygulamasından kolilerini seçer ve ödemelerini peşin olarak güvenli havuza yapar. Siparişler birleşerek <strong>fabrika çıkışı Tır Kotasını (1.000 Koli)</strong> doldurur.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-sky-700">
+                            <span>Aracı & Plasiyer Makası: %0.0</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white rounded-2xl p-6 border-2 border-sky-500 shadow-md flex flex-col justify-between relative">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-lg">2</span>
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">%1.5 Depo Komisyonu</span>
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-900 mb-2">Fabrika Tırı → Bölge Depo Bakkal</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Üretici tırları (Ülker, Eti, Coca-Cola vb.) ilçedeki 100 bakkalı tek tek gezmek yerine, sadece <strong>4 Bölge Lider Depo Bakkalına</strong> palet bazlı indirme yapar. Depo Bakkal boş ardiyesini kullandırır ve cirodan <strong>%1.5 net komisyon</strong> kazanır.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-700">
+                            <span>Üretici Durak Maliyeti: -%85 Düşüş</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-emerald-500 transition shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black text-lg">3</span>
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Sıfır Kargo Ücreti</span>
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-900 mb-2">QR Kod ile 10 Dakikada Gel-Al</h3>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Tır paletleri indirdiğinde üye bakkalların telefonuna <strong>QR Teslimat Fişi</strong> gider. Bakkal dükkanını saatlerce kapatıp Toptancı Haline gitmek yerine, 300m ötedeki komşu Depo Bakkaldan malını kendi imkanıyla 10 dakikada alır.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-700">
+                            <span>Net Birim Tasarruf: %19.3</span>
+                            <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Comparison Table & Interactive Savings Simulator -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div class="bg-slate-900 text-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-sky-400">Matematiksel Kanıt & Finansal Doğrulama</span>
+                            <h2 class="text-2xl font-black mt-1">Ekonomik Model ve %19.3 Tasarruf Simülatörü</h2>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Geleneksel distribütör zinciri ile EsnafB2B Bölge Depo Bakkal modelinin karşılaştırmalı birim maliyet analizi.</p>
+                        </div>
+                        <div class="flex items-center gap-3 bg-slate-800 px-4 py-3 rounded-2xl border border-slate-700">
+                            <div class="text-right">
+                                <div class="text-[11px] text-slate-400">Geleneksel: 100.0 Birim</div>
+                                <div class="text-sm font-bold text-emerald-400">EsnafB2B: 80.7 Birim</div>
+                            </div>
+                            <div class="text-2xl font-black px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                -%19.3
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                        <!-- Left: Exact Cost Breakdown Table -->
+                        <div class="lg:col-span-7 space-y-4">
+                            <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                                <i data-lucide="table" class="w-5 h-5 text-sky-600"></i>
+                                Birim Maliyet Kalemleri Karşılaştırma Tablosu
+                            </h3>
+                            <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+                                            <th class="py-3.5 px-4 font-bold">Maliyet Kalemi</th>
+                                            <th class="py-3.5 px-4 font-bold">Geleneksel Sistem</th>
+                                            <th class="py-3.5 px-4 font-bold text-sky-700">EsnafB2B Modeli</th>
+                                            <th class="py-3.5 px-4 font-bold">Kazanç Kaynağı</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-200">
+                                        <tr>
+                                            <td class="py-3.5 px-4 font-semibold text-slate-900">Distribütör Makası</td>
+                                            <td class="py-3.5 px-4 text-rose-600 font-semibold">%12.0</td>
+                                            <td class="py-3.5 px-4 text-emerald-600 font-bold">%0.0</td>
+                                            <td class="py-3.5 px-4 text-slate-600">Doğrudan Fabrika Tır Alımı</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3.5 px-4 font-semibold text-slate-900">Lojistik / Depo Komisyonu</td>
+                                            <td class="py-3.5 px-4 text-rose-600 font-semibold">%6.5</td>
+                                            <td class="py-3.5 px-4 text-amber-600 font-bold">%1.5</td>
+                                            <td class="py-3.5 px-4 text-slate-600">Gel-Al (Yalnız %1.5 Depo Bakkal Payı)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3.5 px-4 font-semibold text-slate-900">Toplu Alım (Volume Bonus)</td>
+                                            <td class="py-3.5 px-4 text-slate-500">%0.0</td>
+                                            <td class="py-3.5 px-4 text-emerald-600 font-bold">-%4.2 (İskonto)</td>
+                                            <td class="py-3.5 px-4 text-slate-600">4 Bölge Tır Bazlı Peşin İskonto</td>
+                                        </tr>
+                                        <tr class="bg-sky-50/80 font-extrabold text-slate-900">
+                                            <td class="py-4 px-4">Toplam Birim Maliyet</td>
+                                            <td class="py-4 px-4 text-slate-700">100.0 Birim</td>
+                                            <td class="py-4 px-4 text-sky-700 text-base">80.7 Birim</td>
+                                            <td class="py-4 px-4 text-emerald-700">%19.3 Net Tasarruf</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Depo Bakkal Earnings Mini Calculator -->
+                            <div class="bg-amber-50/90 border border-amber-200 rounded-2xl p-5 mt-4">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                    <div>
+                                        <span class="text-[11px] font-extrabold uppercase text-amber-800">Bölge Lideri Esnaf Hesaplayıcı</span>
+                                        <h4 class="text-sm font-black text-slate-900">"Depo Bakkal Olursam Ayda Ne Kazanırım?" (%1.5 Pasif Komisyon)</h4>
+                                    </div>
+                                    <button onclick="openDepotModal()" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white transition shrink-0">
+                                        Depo Bakkal Başvurusu Yap
+                                    </button>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs font-semibold text-slate-700">
+                                        <span>Bölgenizdeki 25 Bakkalın Aylık Toplam Sipariş Hacmi:</span>
+                                        <span id="depotVolumeLabel" class="font-black text-amber-900">2.500.000 TL</span>
+                                    </div>
+                                    <input type="range" id="depotVolumeSlider" min="500000" max="6000000" step="250000" value="2500000" oninput="updateCalculators()" class="w-full accent-amber-600 cursor-pointer">
+                                    <div class="flex flex-wrap items-center justify-between pt-2 border-t border-amber-200/80 text-xs">
+                                        <span class="text-slate-600">Sıfır stok riski ile sadece boş deponuzu kullandırarak:</span>
+                                        <div class="text-sm font-black text-amber-800">
+                                            Aylık Net Komisyon: <span id="depotMonthlyEarning" class="text-base text-emerald-700">37.500 TL</span> / ay
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Interactive Member Grocery Savings Calculator -->
+                        <div class="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col justify-between space-y-5">
+                            <div>
+                                <span class="text-xs font-bold uppercase text-sky-600">Canlı Bakkal Kârlılık Hesaplayıcı</span>
+                                <h3 class="text-lg font-black text-slate-900 mt-0.5">Bakkalınızın Net Kazancını Hesaplayın</h3>
+                                <p class="text-xs text-slate-500 mt-1">Aylık toptan mal alımınızı ve bölge koli hacmini kaydırarak kazancınızı görün.</p>
+
+                                <div class="space-y-5 mt-5">
+                                    <!-- Slider 1: Monthly Purchase -->
+                                    <div>
+                                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                                            <span class="text-slate-700">Bakkalın Aylık Toptan Alım Tutarı:</span>
+                                            <span id="calcMonthlySpendLabel" class="text-sky-700 text-sm font-black">150.000 TL</span>
+                                        </div>
+                                        <input type="range" id="calcMonthlySpend" min="30000" max="500000" step="10000" value="150000" oninput="updateCalculators()" class="w-full accent-sky-600 cursor-pointer">
+                                        <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                            <span>30.000 TL</span>
+                                            <span>Ortalama Bakkal: 150.000 TL</span>
+                                            <span>500.000 TL</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Slider 2: Regional Box Volume (Logarithmic bonus above 1000) -->
+                                    <div>
+                                        <div class="flex justify-between text-xs font-bold mb-1.5">
+                                            <span class="text-slate-700">Bölge Toplam Sipariş Hacmi (Koli):</span>
+                                            <span id="calcBoxVolumeLabel" class="text-emerald-700 text-sm font-black">1.000 Koli</span>
+                                        </div>
+                                        <input type="range" id="calcBoxVolume" min="400" max="2500" step="100" value="1000" oninput="updateCalculators()" class="w-full accent-emerald-600 cursor-pointer">
+                                        <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                                            <span>400 Koli</span>
+                                            <span>1.000 Koli (Tır Kotası)</span>
+                                            <span>2.500 Koli (%21+ Logaritmik)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Result Cards -->
+                            <div class="space-y-3 pt-4 border-t border-slate-200">
+                                <div class="flex items-center justify-between bg-white p-3.5 rounded-xl border border-slate-200">
+                                    <div>
+                                        <div class="text-xs text-slate-500">Aktif İskonto / Tasarruf Oranı</div>
+                                        <div id="calcBonusStatus" class="text-[11px] font-semibold text-emerald-600">Standart Tır Kotası Aktif</div>
+                                    </div>
+                                    <div id="calcDiscountRate" class="text-2xl font-black text-sky-600">%19.3</div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-emerald-600 text-white p-4 rounded-xl shadow-sm">
+                                        <div class="text-[11px] font-medium text-emerald-100">Aylık Net Cepte Kalan</div>
+                                        <div id="calcMonthlySaving" class="text-xl font-black mt-1">28.950 TL</div>
+                                    </div>
+                                    <div class="bg-slate-900 text-white p-4 rounded-xl shadow-sm">
+                                        <div class="text-[11px] font-medium text-slate-300">Yıllık Net Ekstra Kâr</div>
+                                        <div id="calcAnnualSaving" class="text-xl font-black mt-1 text-emerald-400">347.400 TL</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- VIEW 2: ÜYE BAKKAL UYGULAMASI (SİPARİŞ & GEL-AL MOBİL SİMÜLASYONU)    -->
+        <!-- ===================================================================== -->
+        <section id="view-bakkal" class="hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <!-- Top Control Bar for Jury Presentation -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                        <i data-lucide="smartphone" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-black text-slate-900">Üye Bakkal Mobil Uygulaması (Sipariş & Gel-Al MVP)</h2>
+                        <p class="text-xs text-slate-500">Aktif Hesap: <strong>Moda Güven Bakkal (Üye #104)</strong> • B2B Havuzdan Koli Ekle & QR Gel-Al Fişi Oluştur</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-600">Görünüm Modu:</span>
+                    <button onclick="setMobileFrameMode(true)" id="btnFramePhone" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition">
+                        Telefon Çerçevesi
+                    </button>
+                    <button onclick="setMobileFrameMode(false)" id="btnFrameFull" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+                        Geniş Ekran
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left / Center: Interactive Mobile App Container -->
+                <div id="mobileAppWrapper" class="lg:col-span-7 flex justify-center">
+                    <div id="phoneFrameContainer" class="w-full max-w-[430px] bg-slate-900 rounded-[42px] p-3 shadow-2xl border-4 border-slate-800">
+                        <!-- Phone Notch -->
+                        <div class="w-32 h-5 bg-slate-900 mx-auto rounded-b-2xl flex items-center justify-center mb-1">
+                            <div class="w-12 h-1.5 bg-slate-700 rounded-full"></div>
+                        </div>
+
+                        <!-- Phone Screen Content -->
+                        <div class="bg-slate-50 rounded-[32px] overflow-hidden flex flex-col h-[720px] border border-slate-200">
+                            <!-- App Header -->
+                            <div class="bg-slate-900 text-white p-4 space-y-3 shrink-0">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400">EsnafB2B Dijital Kooperatif</span>
+                                        <h3 class="text-sm font-black">Moda Güven Bakkal</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] text-slate-400 block">Güncel İskonto</span>
+                                        <span id="appHeaderDiscount" class="text-xs font-black px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">%19.3 Avantaj</span>
+                                    </div>
+                                </div>
+
+                                <!-- Kadıköy 4 Bölge Selector -->
+                                <div>
+                                    <label for="zoneSelect" class="text-[10px] font-semibold text-slate-300 block mb-1">Bağlı Olduğunuz Bölge & Gel-Al Depo Bakkalı:</label>
+                                    <select id="zoneSelect" onchange="changeZone(this.value)" class="w-full bg-slate-800 text-white text-xs font-semibold rounded-xl px-3 py-2 border border-slate-700 focus:outline-none focus:border-sky-400">
+                                        <option value="0">Bölge 1: Moda - Caferağa (Depo: Moda Merkez Bakkal - 350m)</option>
+                                        <option value="1">Bölge 2: Fenerbahçe - Göztepe (Depo: Göztepe Yıldız Market - 420m)</option>
+                                        <option value="2">Bölge 3: Kozyatağı - Bostancı (Depo: Bostancı Çınar Bakkal - 280m)</option>
+                                        <option value="3">Bölge 4: Fikirtepe - Hasanpaşa (Depo: Hasanpaşa Bereket Gıda - 500m)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Live Regional Truck Quota Bar -->
+                                <div class="bg-slate-800/90 rounded-xl p-2.5 border border-slate-700">
+                                    <div class="flex justify-between items-center text-[11px] mb-1">
+                                        <span class="font-bold text-sky-300 flex items-center gap-1">
+                                            <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+                                            <span id="quotaZoneTitle">Bölge 1 Tır Kotası:</span>
+                                        </span>
+                                        <span id="quotaCountText" class="font-black text-white">872 / 1000 Koli (%87)</span>
+                                    </div>
+                                    <div class="w-full h-2.5 bg-slate-700 rounded-full overflow-hidden">
+                                        <div id="quotaProgressBar" class="h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300" style="width: 87%;"></div>
+                                    </div>
+                                    <p id="quotaSubText" class="text-[10px] text-emerald-300 mt-1 font-medium">
+                                        Tır kalkışına 128 koli kaldı! %4.2 Toplu Alım İskontosu Aktif.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Product Catalog Inside Phone -->
+                            <div class="p-3.5 overflow-y-auto mobile-scroll flex-grow space-y-2.5" id="appProductCatalog">
+                                <!-- Populated dynamically by JS -->
+                            </div>
+
+                            <!-- Sticky App Bottom Checkout Bar -->
+                            <div class="bg-white border-t border-slate-200 p-3.5 shrink-0 space-y-2 shadow-lg">
+                                <div class="flex items-center justify-between text-xs">
+                                    <div>
+                                        <span class="text-slate-500">Seçilen: <strong id="appCartBoxes" class="text-slate-900">12 Koli</strong></span>
+                                        <span class="mx-1 text-slate-300">|</span>
+                                        <span class="text-emerald-600 font-bold">Kazanç: <span id="appCartSavings">1.980 TL</span></span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] line-through text-slate-400 block" id="appCartOldTotal">10.260 TL</span>
+                                        <span class="text-sm font-black text-slate-900" id="appCartNewTotal">8.280 TL</span>
+                                    </div>
+                                </div>
+                                <button onclick="completeGrocerOrder()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2 transition">
+                                    <i data-lucide="qr-code" class="w-4 h-4"></i>
+                                    Havuz Ödemesini Onayla & Gel-Al QR Oluştur
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Gel-Al QR Pickup Pass & How It Works Guide -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Dynamic QR Pass Container -->
+                    <div id="qrPassCard" class="bg-white rounded-3xl border-2 border-emerald-500 shadow-lg overflow-hidden">
+                        <div class="bg-emerald-600 text-white p-5 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-700 px-2 py-0.5 rounded">Gel-Al Öz-Teslimat Fişi</span>
+                                <h3 class="text-lg font-black mt-1">Dijital Depo Teslimat Kartı</h3>
+                            </div>
+                            <i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-200"></i>
+                        </div>
+
+                        <div class="p-6 space-y-5">
+                            <div class="flex flex-col sm:flex-row items-center gap-5 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <!-- Dynamic SVG QR Code Representation -->
+                                <div class="w-28 h-28 bg-white p-2 rounded-xl border border-slate-300 shrink-0 flex items-center justify-center shadow-inner">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full text-slate-900" fill="currentColor">
+                                        <rect x="5" y="5" width="28" height="28" fill="none" stroke="currentColor" stroke-width="6"/>
+                                        <rect x="13" y="13" width="12" height="12"/>
+                                        <rect x="67" y="5" width="28" height="28" fill="none" stroke="currentColor" stroke-width="6"/>
+                                        <rect x="75" y="13" width="12" height="12"/>
+                                        <rect x="5" y="67" width="28" height="28" fill="none" stroke="currentColor" stroke-width="6"/>
+                                        <rect x="13" y="75" width="12" height="12"/>
+                                        <rect x="42" y="10" width="8" height="8"/>
+                                        <rect x="52" y="18" width="8" height="16"/>
+                                        <rect x="42" y="42" width="16" height="16"/>
+                                        <rect x="10" y="42" width="16" height="8"/>
+                                        <rect x="66" y="44" width="10" height="10"/>
+                                        <rect x="82" y="48" width="12" height="16"/>
+                                        <rect x="42" y="66" width="10" height="24"/>
+                                        <rect x="58" y="72" width="16" height="10"/>
+                                        <rect x="78" y="76" width="16" height="16"/>
+                                    </svg>
+                                </div>
+                                <div class="space-y-1.5 text-center sm:text-left">
+                                    <div class="text-xs text-slate-500">Teslimat PIN Kodu:</div>
+                                    <div id="passPinCode" class="text-2xl font-black tracking-widest text-slate-900 font-mono">EB2B-4892</div>
+                                    <div id="passDepotName" class="text-xs font-bold text-sky-700">Teslim Noktası: Moda Merkez Bakkal (350m)</div>
+                                    <div class="text-[11px] text-emerald-700 font-semibold flex items-center justify-center sm:justify-start gap-1">
+                                        <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                                        <span>10 dk içinde kendi aracınızla/el arabanızla alabilirsiniz</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-xs border-t border-slate-200 pt-4">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Alıcı Üye Esnaf:</span>
+                                    <span class="font-bold text-slate-900">Moda Güven Bakkal (#104)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Toplam Sipariş Hacmi:</span>
+                                    <span id="passBoxCount" class="font-bold text-slate-900">12 Koli (Palet İçi Bölünmüş)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500">Havuz Ödeme Tutarı:</span>
+                                    <span id="passTotalPaid" class="font-bold text-slate-900">8.280 TL (Peşin Havuz)</span>
+                                </div>
+                                <div class="flex justify-between text-emerald-700 font-bold">
+                                    <span>Geleneksel Toptancıya Göre Net Kazanç:</span>
+                                    <span id="passTotalSaved">+1.980 TL (%19.3)</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex flex-col sm:flex-row gap-2.5">
+                                <button onclick="switchView('depo')" class="flex-1 py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs flex items-center justify-center gap-2 transition">
+                                    <i data-lucide="warehouse" class="w-4 h-4"></i>
+                                    Şimdi Depo Bakkal Paneline Geç & QR Okut
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explanation Card for Jury -->
+                    <div class="bg-slate-900 text-white rounded-2xl p-5 space-y-3">
+                        <h4 class="text-sm font-extrabold text-sky-400 flex items-center gap-2">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            Neden "Gel-Al (Öz-Teslimat)" Modeli?
+                        </h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Geleneksel B2B girişimleri kargo ve kamyonet filosu kurmaya çalıştığı için yüksek operasyonel maliyetle batar. EsnafB2B'de tır doğrudan mahalledeki <strong>Lider Depo Bakkala</strong> iner; komşu bakkallar 300 metre mesafeden kendi el arabası veya binek aracıyla kolisini alır. Dış lojistik riski <strong>%0'dır</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- VIEW 3: DEPO BAKKAL PANELİ (%1.5 KOMİSYON & QR TESLİMAT YÖNETİMİ)     -->
+        <!-- ===================================================================== -->
+        <section id="view-depo" class="hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            
+            <!-- Header Banner -->
+            <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/20 text-xs font-bold">
+                        <i data-lucide="warehouse" class="w-4 h-4"></i>
+                        Bölge 1 Lider Depo Bakkalı: Moda Merkez Bakkal (Ahmet Yılmaz)
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black">Depo Bakkal Yönetim & %1.5 Komisyon Paneli</h2>
+                    <p class="text-xs sm:text-sm text-amber-100 max-w-2xl">
+                        Dükkanınızın atıl bodrum/ardiye alanını bölgenin toplu alım merkezi olarak kullandırın, gelen komşu bakkalların QR kodunu okutup kolilerini teslim edin ve tüm bölge cirosundan <strong>hiçbir stok riski almadan %1.5 net komisyon</strong> kazanın.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3 shrink-0">
+                    <button onclick="openDepotModal()" class="px-5 py-3 rounded-xl bg-white text-amber-900 hover:bg-amber-50 font-extrabold text-xs shadow-md flex items-center gap-2 transition">
+                        <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i>
+                        Yeni Depo Bakkal Başvuru Formu
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4 KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
+                        <span>Bu Haftaki Bölge Hacmi</span>
+                        <i data-lucide="trending-up" class="w-4 h-4 text-sky-600"></i>
+                    </div>
+                    <div id="kpiDepotVolume" class="text-2xl font-black text-slate-900 mt-2">482.500 TL</div>
+                    <div class="text-[11px] text-emerald-600 font-semibold mt-1">28 Üye Bakkalın Birleşik Siparişi</div>
+                </div>
+
+                <div class="bg-emerald-50 p-5 rounded-2xl border-2 border-emerald-500 shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-emerald-800 font-bold">
+                        <span>Kazanılan %1.5 Net Komisyon</span>
+                        <i data-lucide="wallet" class="w-4 h-4 text-emerald-600"></i>
+                    </div>
+                    <div id="kpiDepotCommission" class="text-2xl font-black text-emerald-700 mt-2">7.237,50 TL</div>
+                    <div class="text-[11px] text-emerald-700 font-medium mt-1">QR Teslimat Anında Hesaba Geçer</div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
+                        <span>Bekleyen Gel-Al Teslimatı</span>
+                        <i data-lucide="package-check" class="w-4 h-4 text-amber-600"></i>
+                    </div>
+                    <div id="kpiPendingPickups" class="text-2xl font-black text-amber-600 mt-2">3 Bakkal</div>
+                    <div class="text-[11px] text-slate-500 mt-1">Bugün Teslim Alınacak Koliler</div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-semibold">
+                        <span>Boş Depo Kapasitesi (25 m²)</span>
+                        <i data-lucide="layers" class="w-4 h-4 text-indigo-600"></i>
+                    </div>
+                    <div id="kpiDepotCapacity" class="text-2xl font-black text-slate-900 mt-2">%68 Boş</div>
+                    <div class="text-[11px] text-slate-500 mt-1">12 Palet Kapasiteli Ardiye Alanı</div>
+                </div>
+            </div>
+
+            <!-- Incoming Neighbor Groceries Pickup Queue -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900">Komşu Bakkallar Gel-Al Teslimat Listesi (Canlı Kuyruk)</h3>
+                        <p class="text-xs text-slate-500">Fabrika tırından indirilen kolileri komşu bakkal teslim almaya geldiğinde <strong>"QR Kod Okut ve Teslim Et"</strong> butonuna tıklayın.</p>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 font-bold text-xs border border-amber-200">
+                        <i data-lucide="scan-line" class="w-4 h-4"></i> QR Doğrulama Sistemi Aktif
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-700 border-b border-slate-200">
+                                <th class="py-3.5 px-4 font-bold">Teslimat Kodu</th>
+                                <th class="py-3.5 px-4 font-bold">Alıcı Komşu Bakkal</th>
+                                <th class="py-3.5 px-4 font-bold">Koli Sayısı</th>
+                                <th class="py-3.5 px-4 font-bold">Sipariş Tutarı</th>
+                                <th class="py-3.5 px-4 font-bold text-emerald-700">Depo %1.5 Kazancı</th>
+                                <th class="py-3.5 px-4 font-bold">Durum</th>
+                                <th class="py-3.5 px-4 font-bold text-right">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="depotPickupTableBody" class="divide-y divide-slate-200">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- VIEW 4: ÜRETİCİ CANLI VERİ PANOSU (DIGITAL VISIBILITY)                -->
+        <!-- ===================================================================== -->
+        <section id="view-uretici" class="hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+            
+            <!-- Top Manufacturer Header -->
+            <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                            Digital Visibility • FMCG Üretici Paneli
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                            Yeşil Lojistik (TÜBİTAK 2204-D & TEKNOFEST)
+                        </span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-black">Üretici Canlı Veri ve Bölgesel Sevkiyat Panosu</h2>
+                    <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
+                        Ülker, Eti, Coca-Cola ve Sırma gibi üreticiler Kadıköy'de <strong>100 bakkalı tek tek gezmek yerine sadece 4 Bölge Depo Bakkalına</strong> palet indirir; lojistik durak maliyetini <strong>%85 düşürür</strong> ve mahalle bazlı tüketim hızını canlı izler.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 shrink-0">
+                    <select id="manufacturerBrandFilter" onchange="filterManufacturerBrand(this.value)" class="bg-slate-800 text-white text-xs font-bold px-4 py-3 rounded-xl border border-slate-700 focus:outline-none">
+                        <option value="ALL">Tüm FMCG Üreticileri (Konsolide)</option>
+                        <option value="Ülker">Ülker Bisküvi & Çikolata A.Ş.</option>
+                        <option value="Eti">Eti Gıda Sanayi ve Ticaret A.Ş.</option>
+                        <option value="Coca-Cola">Coca-Cola İçecek A.Ş.</option>
+                        <option value="Sırma">Sırma Grup İçecek</option>
+                    </select>
+                    <button onclick="openShipmentModal()" class="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs shadow-lg flex items-center gap-2 transition">
+                        <i data-lucide="truck" class="w-4 h-4"></i>
+                        Yeni Tır Sevkiyatı Planla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Manufacturer Executive KPIs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Durak Optimizasyonu (Kadıköy)</div>
+                    <div class="text-2xl font-black text-indigo-600 mt-1">102 Bakkal → 4 Depo</div>
+                    <div class="text-[11px] font-bold text-emerald-600 mt-1">%85 Lojistik & Yakıt Tasarrufu</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Aktif Havuz Siparişi (Peşin)</div>
+                    <div id="mfgTotalBoxes" class="text-2xl font-black text-slate-900 mt-1">3.460 Koli</div>
+                    <div class="text-[11px] text-slate-500 mt-1">%100 Tahsilat Garantili Havuz</div>
+                </div>
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="text-xs font-semibold text-slate-500">Ortalama Depo Devir Hızı</div>
+                    <div class="text-2xl font-black text-sky-600 mt-1">3.8 Saat</div>
+                    <div class="text-[11px] text-slate-500 mt-1">Tırdan İndikten Gel-Al'a Kadar</div>
+                </div>
+                <div class="bg-emerald-50 p-5 rounded-2xl border border-emerald-200 shadow-sm">
+                    <div class="text-xs font-bold text-emerald-800">Karbon Emisyon Azaltımı (CO₂)</div>
+                    <div id="mfgCarbonSaved" class="text-2xl font-black text-emerald-700 mt-1">-1.420 kg CO₂ / ay</div>
+                    <div class="text-[11px] font-semibold text-emerald-700 mt-1">Şehir İçi Dağıtım Trafiği Sıfırlandı</div>
+                </div>
+            </div>
+
+            <!-- Kadıköy 4-Zone Live Demand & Depletion Velocity Grid -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-lg font-black text-slate-900">Kadıköy 4 Bölge Canlı Tüketim Hızı ve Tır Kotası Haritası</h3>
+                        <p class="text-xs text-slate-500">Hangi bölgede hangi ürün grubunun ne hızla çekildiğini anlık izleyin ve doğrudan ilgili Depo Bakkala tır yönlendirin.</p>
+                    </div>
+                    <span id="mfgActiveBrandBadge" class="text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        Filtre: Tüm Üreticiler
+                    </span>
+                </div>
+
+                <div id="manufacturerZonesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- MODALS & TOAST NOTIFICATIONS                                          -->
+    <!-- ===================================================================== -->
+
+    <!-- Simulated QR Code Scanner Modal (For Depo Bakkal View) -->
+    <div id="qrScannerModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200">
+            <div class="bg-slate-900 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="scan-line" class="w-5 h-5 text-emerald-400"></i>
+                    <h3 class="text-base font-black">Depo Bakkal QR Teslimat Okuyucu</h3>
+                </div>
+                <button onclick="closeQrScannerModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-5 text-center">
+                <div class="relative w-56 h-56 mx-auto bg-slate-900 rounded-2xl border-4 border-emerald-500 flex items-center justify-center overflow-hidden">
+                    <div class="scanner-laser"></div>
+                    <i data-lucide="qr-code" class="w-28 h-28 text-white/90"></i>
+                    <div class="absolute bottom-2 inset-x-2 bg-black/70 text-[11px] font-mono text-emerald-300 py-1 rounded" id="scannerTargetCode">
+                        EB2B-4892 DOĞRULANIYOR...
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <h4 id="scannerGrocerName" class="text-base font-black text-slate-900">Caferağa Kardeşler Bakkal</h4>
+                    <p id="scannerOrderDetails" class="text-xs text-slate-600">18 Koli Teslimat • +186,00 TL (%1.5 Depo Komisyonu)</p>
+                </div>
+                <button onclick="confirmQrDelivery()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-lg transition flex items-center justify-center gap-2">
+                    <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                    QR Kodu Onayla, Kolileri Teslim Et ve %1.5 Komisyonu Al
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Depo Bakkal Application Modal -->
+    <div id="depotApplyModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-200">
+            <div class="bg-amber-500 text-slate-950 p-5 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider">Ulusal Ölçeklenme • Evre 3</span>
+                    <h3 class="text-lg font-black">Bölge Lider "Depo Bakkal" Başvuru Formu</h3>
+                </div>
+                <button onclick="closeDepotModal()" class="text-slate-900 hover:text-black">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="submitDepotApplication(event)" class="p-6 space-y-4 text-xs">
+                <p class="text-slate-600">
+                    Dükkanınızın en az 15 m² boş bodrum, yan dükkan veya ardiye alanı varsa bölgenizin <strong>Depo Bakkalı</strong> olun; komşu bakkalların Gel-Al teslimatlarından <strong>%1.5 pasif komisyon</strong> kazanın.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Bakkal / Market Adı *</label>
+                        <input type="text" required placeholder="Örn: Acıbadem Çınar Bakkal" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">İlçe ve Mahalle *</label>
+                        <input type="text" required placeholder="Örn: Kadıköy / Acıbadem" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-amber-500">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Boş Depo / Ardiye Alanı (m²) *</label>
+                        <input type="number" required min="10" placeholder="Örn: 30 m²" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-amber-500">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Tır / Kamyon Yanaşma Durumu *</label>
+                        <select class="w-full px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-amber-500">
+                            <option>Ana Cadde Üzeri (Tır Uygun)</option>
+                            <option>Geniş Sokak (Kamyon / Palet Uygun)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeDepotModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold">İptal</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold">Başvuruyu Gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Manufacturer New Truck Shipment Modal -->
+    <div id="shipmentModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl border border-slate-200">
+            <div class="bg-indigo-600 text-white p-5 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-200">Doğrudan Fabrika Çıkışı</span>
+                    <h3 class="text-lg font-black">Bölge Depo Bakkalına Tır Sevkiyatı Planla</h3>
+                </div>
+                <button onclick="closeShipmentModal()" class="text-indigo-200 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form onsubmit="submitNewShipment(event)" class="p-6 space-y-4 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Hedef Bölge Depo Bakkalı Seçin</label>
+                    <select id="shipmentZoneSelect" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 font-semibold">
+                        <option value="0">Bölge 1: Moda Merkez Bakkal (Mevcut: 872 Koli)</option>
+                        <option value="1">Bölge 2: Göztepe Yıldız Market (Mevcut: 920 Koli)</option>
+                        <option value="2">Bölge 3: Bostancı Çınar Bakkal (Mevcut: 1.040 Koli - Sevkiyata Hazır)</option>
+                        <option value="3">Bölge 4: Hasanpaşa Bereket Gıda (Mevcut: 640 Koli)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700 block mb-1">Bölgesel Ekstra Tır Kampanyası (İsteğe Bağlı)</label>
+                    <input type="text" placeholder="Örn: 1.000 Koli Üstü Ekstra %1.5 Fabrika İskontosu" class="w-full px-3 py-2.5 rounded-xl border border-slate-300">
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeShipmentModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold">Vazgeç</button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold">Tır Sevkiyatını Başlat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Global Toast Notification -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-slate-900 text-white px-4 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-start gap-3">
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+        <div>
+            <div id="toastTitle" class="text-xs font-extrabold text-white">İşlem Başarılı</div>
+            <div id="toastMessage" class="text-[11px] text-slate-300 mt-0.5">Detaylar güncellendi.</div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-black text-white">EsnafB2B v5.0</span>
+                <span>•</span>
+                <span>Dağıtık B2B Tedarik Zinciri ve Bölgesel Depo Bakkal Dijital Kooperatif Modeli</span>
+            </div>
+            <div>
+                Pilot Uygulama: Atatürk Fen Lisesi & Kadıköy 4 Bölge • 2026–2027 Yarışma Sunum Prototipi
+            </div>
+        </div>
+    </footer>
+
+    <!-- APPLICATION LOGIC -->
+    <script>
+        // --- STATE DATA ---
+        const zones = [
+            {
+                id: 0,
+                name: "Bölge 1: Moda – Caferağa",
+                depotName: "Moda Merkez Bakkal",
+                distance: "350m uzaklıkta",
+                memberCount: 28,
+                baseBoxes: 860,
+                quota: 1000,
+                velocity: "Çok Yüksek (3.2 saatte tükeniyor)",
+                topBrand: "Ülker & Coca-Cola"
+            },
+            {
+                id: 1,
+                name: "Bölge 2: Fenerbahçe – Göztepe",
+                depotName: "Göztepe Yıldız Market",
+                distance: "420m uzaklıkta",
+                memberCount: 24,
+                baseBoxes: 920,
+                quota: 1000,
+                velocity: "Yüksek (4.0 saatte tükeniyor)",
+                topBrand: "Eti & Sırma Su"
+            },
+            {
+                id: 2,
+                name: "Bölge 3: Kozyatağı – Bostancı",
+                depotName: "Bostancı Çınar Bakkal",
+                distance: "280m uzaklıkta",
+                memberCount: 31,
+                baseBoxes: 1040,
+                quota: 1000,
+                velocity: "Maksimum (Tır Sevkiyata Hazır)",
+                topBrand: "Ülker & Çaykur"
+            },
+            {
+                id: 3,
+                name: "Bölge 4: Fikirtepe – Hasanpaşa",
+                depotName: "Hasanpaşa Bereket Gıda",
+                distance: "500m uzaklıkta",
+                memberCount: 19,
+                baseBoxes: 640,
+                quota: 1000,
+                velocity: "Orta-Yüksek (Havuz Doluyor)",
+                topBrand: "Eti & Biryağ"
+            }
+        ];
+
+        const products = [
+            {
+                id: "p1",
+                name: "Ülker Çikolatalı Gofret Kolisi (144 Adet)",
+                brand: "Ülker",
+                marketPrice: 1200,
+                poolPrice: 968,
+                qty: 4
+            },
+            {
+                id: "p2",
+                name: "Eti Cin Portakallı Bisküvi Kolisi (96 Adet)",
+                brand: "Eti",
+                marketPrice: 950,
+                poolPrice: 766,
+                qty: 3
+            },
+            {
+                id: "p3",
+                name: "Coca-Cola 1 Litre 12'li Koli Paketi",
+                brand: "Coca-Cola",
+                marketPrice: 480,
+                poolPrice: 387,
+                qty: 2
+            },
+            {
+                id: "p4",
+                name: "Sırma Doğal Kaynak Suyu 0.5L (Karma 20 Koli)",
+                brand: "Sırma",
+                marketPrice: 1600,
+                poolPrice: 1291,
+                qty: 1
+            },
+            {
+                id: "p5",
+                name: "Çaykur Tiryaki Çayı 1 Kg (10'lu Toptan Koli)",
+                brand: "Ülker",
+                marketPrice: 1850,
+                poolPrice: 1493,
+                qty: 1
+            },
+            {
+                id: "p6",
+                name: "Ayçiçek Yağı 5 Litre (4'lü Teneke Koli)",
+                brand: "Eti",
+                marketPrice: 1120,
+                poolPrice: 904,
+                qty: 1
+            }
+        ];
+
+        let selectedZoneIndex = 0;
+        let depotWeeklyVolume = 482500;
+        let depotCommissionTotal = 7237.50;
+        let activeScannerOrderId = null;
+
+        let depotPickupQueue = [
+            {
+                id: "ORD-1",
+                code: "EB2B-4892",
+                grocer: "Moda Güven Bakkal (#104)",
+                boxes: 12,
+                amount: 8280,
+                commission: 124.20,
+                status: "waiting"
+            },
+            {
+                id: "ORD-2",
+                code: "EB2B-7310",
+                grocer: "Caferağa Kardeşler Bakkal (#112)",
+                boxes: 18,
+                amount: 12400,
+                commission: 186.00,
+                status: "waiting"
+            },
+            {
+                id: "ORD-3",
+                code: "EB2B-9104",
+                grocer: "Bahariye Köşe Market (#119)",
+                boxes: 25,
+                amount: 16800,
+                commission: 252.00,
+                status: "waiting"
+            },
+            {
+                id: "ORD-4",
+                code: "EB2B-3041",
+                grocer: "Yoğurtçu Park Gıda (#108)",
+                boxes: 15,
+                amount: 9600,
+                commission: 144.00,
+                status: "delivered"
+            }
+        ];
+
+        // --- VIEW NAVIGATION ---
+        function switchView(viewName) {
+            const views = ['landing', 'bakkal', 'depo', 'uretici'];
+            views.forEach(v => {
+                const section = document.getElementById('view-' + v);
+                const tab = document.getElementById('tab-' + v);
+                if (v === viewName) {
+                    section.classList.remove('hidden');
+                    tab.className = "view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm";
+                } else {
+                    section.classList.add('hidden');
+                    tab.className = "view-tab flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900";
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        // --- VIEW 1: FINANCIAL SIMULATOR ---
+        function formatTL(num) {
+            return new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(num) + " TL";
+        }
+
+        function updateCalculators() {
+            // Member grocery savings calculator
+            const monthlySpend = parseInt(document.getElementById('calcMonthlySpend').value, 10);
+            const boxVolume = parseInt(document.getElementById('calcBoxVolume').value, 10);
+
+            document.getElementById('calcMonthlySpendLabel').textContent = formatTL(monthlySpend);
+            document.getElementById('calcBoxVolumeLabel').textContent = new Intl.NumberFormat('tr-TR').format(boxVolume) + " Koli";
+
+            // Base savings is 19.3%; if boxVolume > 1000, logarithmic extra bonus up to 21.5%
+            let discountRate = 19.3;
+            let statusText = "Standart Tır Kotası (%19.3 Tasarruf)";
+            if (boxVolume > 1000) {
+                const extra = Math.min(2.2, Math.log10(boxVolume / 1000) * 5.5);
+                discountRate = +(19.3 + extra).toFixed(1);
+                statusText = "1.000+ Koli Logaritmik Hacim Bonusu Aktif!";
+            } else if (boxVolume < 1000) {
+                discountRate = 18.1;
+                statusText = "Tır Kotası Doluyor (1.000 Kolide %19.3 Olur)";
+            }
+
+            const monthlySaving = Math.round(monthlySpend * (discountRate / 100));
+            const annualSaving = monthlySaving * 12;
+
+            document.getElementById('calcDiscountRate').textContent = "%" + discountRate;
+            document.getElementById('calcBonusStatus').textContent = statusText;
+            document.getElementById('calcMonthlySaving').textContent = formatTL(monthlySaving);
+            document.getElementById('calcAnnualSaving').textContent = formatTL(annualSaving);
+
+            // Depot grocery 1.5% commission calculator
+            const depotVolume = parseInt(document.getElementById('depotVolumeSlider').value, 10);
+            const depotEarning = Math.round(depotVolume * 0.015);
+            document.getElementById('depotVolumeLabel').textContent = formatTL(depotVolume);
+            document.getElementById('depotMonthlyEarning').textContent = formatTL(depotEarning);
+        }
+
+        // --- VIEW 2: MEMBER GROCERY APP ---
+        function setMobileFrameMode(isPhoneFrame) {
+            const container = document.getElementById('phoneFrameContainer');
+            const btnPhone = document.getElementById('btnFramePhone');
+            const btnFull = document.getElementById('btnFrameFull');
+
+            if (isPhoneFrame) {
+                container.className = "w-full max-w-[430px] bg-slate-900 rounded-[42px] p-3 shadow-2xl border-4 border-slate-800 transition-all";
+                btnPhone.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition";
+                btnFull.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+            } else {
+                container.className = "w-full bg-slate-900 rounded-3xl p-3 shadow-xl border-2 border-slate-800 transition-all";
+                btnFull.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white transition";
+                btnPhone.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition";
+            }
+        }
+
+        function changeZone(zoneIdx) {
+            selectedZoneIndex = parseInt(zoneIdx, 10);
+            renderBakkalApp();
+        }
+
+        function updateProductQty(productId, delta) {
+            const item = products.find(p => p.id === productId);
+            if (!item) return;
+            item.qty = Math.max(0, item.qty + delta);
+            renderBakkalApp();
+        }
+
+        function renderBakkalApp() {
+            const zone = zones[selectedZoneIndex];
+            const catalogEl = document.getElementById('appProductCatalog');
+
+            let totalBoxes = 0;
+            let totalMarketPrice = 0;
+            let totalPoolPrice = 0;
+
+            catalogEl.innerHTML = products.map(p => {
+                totalBoxes += p.qty;
+                totalMarketPrice += p.qty * p.marketPrice;
+                totalPoolPrice += p.qty * p.poolPrice;
+
+                return `
+                    <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between gap-2">
+                        <div class="space-y-0.5">
+                            <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">${p.brand}</span>
+                            <h4 class="text-xs font-bold text-slate-900 leading-snug">${p.name}</h4>
+                            <div class="flex items-center gap-2 pt-0.5">
+                                <span class="text-[11px] line-through text-slate-400">${p.marketPrice} TL</span>
+                                <span class="text-xs font-black text-emerald-700">${p.poolPrice} TL / Koli</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200 shrink-0">
+                            <button onclick="updateProductQty('${p.id}', -1)" class="w-7 h-7 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-black text-sm shadow-sm flex items-center justify-center">-</button>
+                            <span class="w-6 text-center text-xs font-black text-slate-900">${p.qty}</span>
+                            <button onclick="updateProductQty('${p.id}', 1)" class="w-7 h-7 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm shadow-sm flex items-center justify-center">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const currentQuotaBoxes = zone.baseBoxes + totalBoxes;
+            const pct = Math.min(100, Math.round((currentQuotaBoxes / zone.quota) * 100));
+            const remaining = Math.max(0, zone.quota - currentQuotaBoxes);
+
+            document.getElementById('quotaZoneTitle').textContent = `Bölge ${zone.id + 1} Tır Kotası:`;
+            document.getElementById('quotaCountText').textContent = `${currentQuotaBoxes} / ${zone.quota} Koli (%${pct})`;
+            document.getElementById('quotaProgressBar').style.width = `${pct}%`;
+
+            if (remaining === 0) {
+                document.getElementById('quotaSubText').textContent = "1.000 Koli Tır Kotası Doldu! Logaritmik Ekstra İskonto Aktif!";
+                document.getElementById('appHeaderDiscount').textContent = "%20.4 Avantaj";
+            } else {
+                document.getElementById('quotaSubText').textContent = `Tır kalkışına ${remaining} koli kaldı! %4.2 Toplu Alım İskontosu Aktif.`;
+                document.getElementById('appHeaderDiscount').textContent = "%19.3 Avantaj";
+            }
+
+            const totalSaved = totalMarketPrice - totalPoolPrice;
+            document.getElementById('appCartBoxes').textContent = `${totalBoxes} Koli`;
+            document.getElementById('appCartSavings').textContent = formatTL(totalSaved);
+            document.getElementById('appCartOldTotal').textContent = formatTL(totalMarketPrice);
+            document.getElementById('appCartNewTotal').textContent = formatTL(totalPoolPrice);
+
+            document.getElementById('navBadgeCart').textContent = totalBoxes;
+            document.getElementById('mobileNavCartCount').textContent = `${totalBoxes} Koli`;
+
+            // Also update the QR Pass preview on the right
+            document.getElementById('passDepotName').textContent = `Teslim Noktası: ${zone.depotName} (${zone.distance})`;
+            document.getElementById('passBoxCount').textContent = `${totalBoxes} Koli (Palet İçi Bölünmüş)`;
+            document.getElementById('passTotalPaid').textContent = `${formatTL(totalPoolPrice)} (Peşin Havuz)`;
+            document.getElementById('passTotalSaved').textContent = `+${formatTL(totalSaved)} (%19.3)`;
+        }
+
+        function completeGrocerOrder() {
+            let totalBoxes = 0;
+            let totalPoolPrice = 0;
+            products.forEach(p => {
+                totalBoxes += p.qty;
+                totalPoolPrice += p.qty * p.poolPrice;
+            });
+
+            if (totalBoxes === 0) {
+                showToast("Sepetiniz Boş", "Lütfen havuza katılmak için en az 1 koli ürün ekleyin.");
+                return;
+            }
+
+            const zone = zones[selectedZoneIndex];
+            const randomPin = "EB2B-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('passPinCode').textContent = randomPin;
+
+            // Add or update order in Depot Pickup Queue so the jury sees it live in View 3
+            const commission = +(totalPoolPrice * 0.015).toFixed(2);
+            depotPickupQueue.unshift({
+                id: "ORD-" + Date.now(),
+                code: randomPin,
+                grocer: `Moda Güven Bakkal (Yeni Sipariş)`,
+                boxes: totalBoxes,
+                amount: totalPoolPrice,
+                commission: commission,
+                status: "waiting"
+            });
+
+            renderDepotQueue();
+            showToast(
+                "Gel-Al QR Teslimat Fişi Oluşturuldu!",
+                `${randomPin} kodlu ${totalBoxes} kolilik siparişiniz ${zone.depotName} teslimat listesine eklendi.`
+            );
+        }
+
+        // --- VIEW 3: DEPO BAKKAL PANELİ ---
+        function renderDepotQueue() {
+            const tbody = document.getElementById('depotPickupTableBody');
+            let waitingCount = 0;
+
+            tbody.innerHTML = depotPickupQueue.map(order => {
+                if (order.status === 'waiting') waitingCount++;
+
+                const statusBadge = order.status === 'waiting'
+                    ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800"><span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-ping"></span>Gel-Al Bekliyor</span>`
+                    : `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Teslim Edildi</span>`;
+
+                const actionBtn = order.status === 'waiting'
+                    ? `<button onclick="openQrScannerModal('${order.id}')" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-sm transition inline-flex items-center gap-1.5">
+                        <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> QR Okut & Teslim Et
+                       </button>`
+                    : `<span class="text-xs font-bold text-slate-400">Komisyon Alındı ✓</span>`;
+
+                return `
+                    <tr class="hover:bg-slate-50/80 transition">
+                        <td class="py-4 px-4 font-mono font-bold text-slate-900">${order.code}</td>
+                        <td class="py-4 px-4 font-bold text-slate-900">${order.grocer}</td>
+                        <td class="py-4 px-4 font-semibold text-slate-700">${order.boxes} Koli</td>
+                        <td class="py-4 px-4 font-semibold text-slate-700">${formatTL(order.amount)}</td>
+                        <td class="py-4 px-4 font-black text-emerald-700">+${order.commission.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL</td>
+                        <td class="py-4 px-4">${statusBadge}</td>
+                        <td class="py-4 px-4 text-right">${actionBtn}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('kpiPendingPickups').textContent = `${waitingCount} Bakkal`;
+            document.getElementById('navBadgeQueue').textContent = waitingCount;
+            document.getElementById('kpiDepotVolume').textContent = formatTL(depotWeeklyVolume);
+            document.getElementById('kpiDepotCommission').textContent = depotCommissionTotal.toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + " TL";
+            lucide.createIcons();
+        }
+
+        function openQrScannerModal(orderId) {
+            const order = depotPickupQueue.find(o => o.id === orderId);
+            if (!order) return;
+            activeScannerOrderId = orderId;
+            document.getElementById('scannerTargetCode').textContent = `${order.code} DOĞRULANIYOR...`;
+            document.getElementById('scannerGrocerName').textContent = order.grocer;
+            document.getElementById('scannerOrderDetails').textContent = `${order.boxes} Koli Gel-Al Teslimatı • +${order.commission.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL (%1.5 Komisyon)`;
+            document.getElementById('qrScannerModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeQrScannerModal() {
+            document.getElementById('qrScannerModal').classList.add('hidden');
+            activeScannerOrderId = null;
+        }
+
+        function confirmQrDelivery() {
+            const order = depotPickupQueue.find(o => o.id === activeScannerOrderId);
+            if (!order) return;
+
+            order.status = 'delivered';
+            depotWeeklyVolume += order.amount;
+            depotCommissionTotal += order.commission;
+
+            closeQrScannerModal();
+            renderDepotQueue();
+            showToast(
+                "QR Teslimat Onaylandı & %1.5 Komisyon Eklendi!",
+                `${order.grocer} kolilerini teslim aldı. +${order.commission.toLocaleString('tr-TR', { minimumFractionDigits: 2 })} TL hesabınıza aktarıldı.`
+            );
+        }
+
+        // --- VIEW 4: MANUFACTURER DASHBOARD ---
+        function renderManufacturerZones(brandFilter = 'ALL') {
+            const grid = document.getElementById('manufacturerZonesGrid');
+            const multiplier = brandFilter === 'ALL' ? 1 : 0.32;
+
+            let totalBoxesAllZones = 0;
+
+            grid.innerHTML = zones.map(z => {
+                const boxes = Math.round(z.baseBoxes * multiplier);
+                const quota = Math.round(z.quota * multiplier);
+                totalBoxesAllZones += boxes;
+                const pct = Math.min(100, Math.round((boxes / quota) * 100));
+
+                return `
+                    <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 flex flex-col justify-between space-y-4">
+                        <div class="flex items-start justify-between gap-2">
+                            <div>
+                                <span class="text-[11px] font-bold uppercase text-indigo-600">${z.name}</span>
+                                <h4 class="text-base font-black text-slate-900 mt-0.5">Depo: ${z.depotName}</h4>
+                                <p class="text-xs text-slate-500">${z.memberCount} Üye Bakkal Bağlı • En Çok Çekilen: <strong>${z.topBrand}</strong></p>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white border border-slate-200 text-slate-900">
+                                ${boxes} / ${quota} Koli
+                            </span>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-slate-600">Raf / Depo Çekim Hızı: <strong class="text-slate-900">${z.velocity}</strong></span>
+                                <span class="text-indigo-600 font-bold">%${pct}</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-indigo-600 rounded-full transition-all duration-300" style="width: ${pct}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-200/80 text-xs">
+                            <span class="text-emerald-700 font-bold">Tek Noktaya Palet İndirme Hazır</span>
+                            <button onclick="dispatchDirectTruck(${z.id})" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold transition">
+                                Bu Depoya Palet Sevk Et
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('mfgTotalBoxes').textContent = new Intl.NumberFormat('tr-TR').format(totalBoxesAllZones) + " Koli";
+            document.getElementById('mfgActiveBrandBadge').textContent = `Filtre: ${brandFilter === 'ALL' ? 'Tüm Üreticiler' : brandFilter}`;
+        }
+
+        function filterManufacturerBrand(brand) {
+            renderManufacturerZones(brand);
+            showToast("Canlı Veri Panosu Filtrelendi", `${brand === 'ALL' ? 'Tüm FMCG üreticileri' : brand} için Kadıköy 4 bölge verileri gösteriliyor.`);
+        }
+
+        function dispatchDirectTruck(zoneId) {
+            const z = zones[zoneId];
+            showToast(
+                "Tır Sevkiyat Emri Oluşturuldu!",
+                `${z.depotName} noktasına doğrudan palet sevkiyatı planlandı. Durak maliyeti %85 azaltıldı.`
+            );
+        }
+
+        // --- MODALS & TOAST HELPERS ---
+        function openDepotModal() {
+            document.getElementById('depotApplyModal').classList.remove('hidden');
+        }
+        function closeDepotModal() {
+            document.getElementById('depotApplyModal').classList.add('hidden');
+        }
+        function submitDepotApplication(e) {
+            e.preventDefault();
+            closeDepotModal();
+            showToast(
+                "Depo Bakkal Başvurunuz Alındı!",
+                "Saha ekibimiz 24 saat içinde depo alanınızı onaylayarak %1.5 komisyon sözleşmenizi aktif edecektir."
+            );
+        }
+
+        function openShipmentModal() {
+            document.getElementById('shipmentModal').classList.remove('hidden');
+        }
+        function closeShipmentModal() {
+            document.getElementById('shipmentModal').classList.add('hidden');
+        }
+        function submitNewShipment(e) {
+            e.preventDefault();
+            const zIdx = parseInt(document.getElementById('shipmentZoneSelect').value, 10);
+            zones[zIdx].baseBoxes += 120;
+            closeShipmentModal();
+            renderManufacturerZones(document.getElementById('manufacturerBrandFilter').value);
+            renderBakkalApp();
+            showToast(
+                "Yeni Tır Sevkiyatı ve Kampanya Tanımlandı!",
+                `${zones[zIdx].depotName} bölgesine sevkiyat başlatıldı ve komşu bakkallara Gel-Al bildirimi gönderildi.`
+            );
+        }
+
+        let toastTimeout = null;
+        function showToast(title, message) {
+            const toast = document.getElementById('toastContainer');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('hidden');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4500);
+        }
+
+        // Initialize on load
+        window.onload = function () {
+            updateCalculators();
+            renderBakkalApp();
+            renderDepotQueue();
+            renderManufacturerZones('ALL');
+            lucide.createIcons();
+        };
+    </script>
+</body>
+</html>

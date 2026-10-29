@@ -1,0 +1,11 @@
+*.pdf
+archive/
+tests/
+supabase/
+.venv/
+.remember/
+.env
+.env*.local
+.playwright-mcp/
+.pytest_cache/
+__pycache__/

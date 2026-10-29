@@ -1,0 +1,13 @@
+.env
+.env*.local
+.venv/
+__pycache__/
+.pytest_cache/
+.vercel/
+.remember/
+.playwright-mcp/
+
+.vercel
+
+# Strategy report stays private
+*.pdf

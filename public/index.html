@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsnafB2B v6.0 | Bölgesel Depo Bakkal ve Dijital Kooperatif Modeli</title>
+    <meta name="description" content="Mahalle bakkalları için ortak alım, bölgesel Depo Bakkal ve Gel-Al teslimat modeli. EKM 2026 GençBizz öğrenci şirketi projesi.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230284c7'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3EEB%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Icons: Lucide (lucide.dev), ISC License, Copyright (c) Lucide Icons and Contributors -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+      <symbol id="i-boxes" viewBox="0 0 24 24"> <path d="M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z" /><path d="m7 16.5-4.74-2.85" /><path d="m7 16.5 5-3" /><path d="M7 16.5v5.17" /><path d="M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z" /><path d="m17 16.5-5-3" /><path d="m17 16.5 4.74-2.85" /><path d="M17 16.5v5.17" /><path d="M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z" /><path d="M12 8 7.26 5.15" /><path d="m12 8 4.74-2.85" /><path d="M12 13.5V8" /></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></symbol>
+<symbol id="i-smartphone" viewBox="0 0 24 24"> <rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></symbol>
+<symbol id="i-warehouse" viewBox="0 0 24 24"> <path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /><path d="M6 13h12" /><path d="M6 17h12" /></symbol>
+<symbol id="i-chart-column" viewBox="0 0 24 24"> <path d="M3 3v16a2 2 0 0 0 2 2h16" /><path d="M18 17V9" /><path d="M13 17V5" /><path d="M8 17v-3" /></symbol>
+<symbol id="i-truck" viewBox="0 0 24 24"> <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><path d="M15 18H9" /><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><circle cx="17" cy="18" r="2" /><circle cx="7" cy="18" r="2" /></symbol>
+<symbol id="i-qr-code" viewBox="0 0 24 24"> <rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /><path d="m16 9-5.5 5.5L8 12" /></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24"> <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"> <path d="M18 6 6 18" /><path d="m6 6 12 12" /></symbol>
+<symbol id="i-package-check" viewBox="0 0 24 24"> <path d="M12 22V12" /><path d="m16 17 2 2 4-4" /><path d="M21 11.127V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l1.32-.753" /><path d="M3.29 7 12 12l8.71-5" /><path d="m7.5 4.27 8.997 5.148" /></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"> <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"> <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></symbol>
+<symbol id="i-trending-down" viewBox="0 0 24 24"> <path d="M16 17h6v-6" /><path d="m22 17-8.5-8.5-5 5L2 7" /></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24"> <path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"> <circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></symbol>
+<symbol id="i-scan-line" viewBox="0 0 24 24"> <path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M7 12h10" /></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"> <path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></symbol>
+    </svg>
+
+    <div class="topbar">
+        <div class="container topbar__inner">
+            <span>EKM 2026 · GençBizz öğrenci şirketi · Pilot: Atatürk Fen Lisesi ve Kadıköy</span>
+            <span class="topbar__demo">Temsili demo verisi: mağaza adları kurgusaldır, markalar örnek amaçlıdır.</span>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container header__inner">
+            <button class="brand" data-view="landing" type="button">
+                <span class="brand__logo"><svg class="icon"><use href="#i-boxes"/></svg></span>
+                <span>
+                    <span class="brand__name">Esnaf<span>B2B</span> <small>v6.0</small></span>
+                    <span class="brand__tagline">Yerel esnaf dijital kooperatifi ve bölgesel depo ağı</span>
+                </span>
+            </button>
+
+            <nav class="tabs" aria-label="Görünüm seçici">
+                <button class="tab is-active" data-view="landing" type="button">
+                    <svg class="icon"><use href="#i-globe"/></svg> Tanıtım
+                </button>
+                <button class="tab" data-view="bakkal" type="button">
+                    <svg class="icon"><use href="#i-smartphone"/></svg> Üye Bakkal
+                    <span class="tab__badge" id="navCartCount">0</span>
+                </button>
+                <button class="tab" data-view="depo" type="button">
+                    <svg class="icon"><use href="#i-warehouse"/></svg> Depo Bakkal
+                    <span class="tab__badge tab__badge--amber" id="navPendingCount">0</span>
+                </button>
+                <button class="tab" data-view="uretici" type="button">
+                    <svg class="icon"><use href="#i-chart-column"/></svg> Üretici
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============ 1. TANITIM ============ -->
+        <section id="view-landing" class="view">
+            <div class="hero">
+                <div class="container hero__grid">
+                    <div class="hero__text">
+                        <p class="eyebrow eyebrow--light">Bölgesel Depo Bakkal ve Dijital Kooperatif Modeli</p>
+                        <h1>Mahalle bakkalları için ortak alım ve bölgesel depo modeli</h1>
+                        <p class="hero__lead">
+                            Her mahallede bir Depo Bakkal ve ona bağlı 40 üye bakkaldan oluşan hücreler kuruyoruz.
+                            Üretici, bakkalları tek tek dolaşmak yerine paletleri Depo Bakkala bırakır.
+                            Üye bakkal siparişini birkaç yüz metre ötedeki depodan kendisi teslim alır (Gel-Al).
+                        </p>
+                        <div class="hero__actions">
+                            <button class="btn btn--primary" data-view="bakkal" type="button">
+                                <svg class="icon"><use href="#i-smartphone"/></svg> Üye bakkal uygulamasını incele
+                            </button>
+                            <button class="btn btn--ghost" data-view="depo" type="button">
+                                <svg class="icon"><use href="#i-warehouse"/></svg> Depo Bakkal paneli
+                            </button>
+                        </div>
+                        <dl class="metrics">
+                            <div><dt>Hedeflenen birim maliyet tasarrufu</dt><dd class="c-emerald">%<span data-bind="saving">19,3</span></dd></div>
+                            <div><dt>Depo Bakkal komisyonu</dt><dd class="c-amber">%1,5</dd></div>
+                            <div><dt>Kadıköy pilotu (4 hücre × 40)</dt><dd class="c-sky">160 bakkal</dd></div>
+                            <div><dt>Depo Bakkal için stok riski</dt><dd class="c-violet">0 TL</dd></div>
+                        </dl>
+                    </div>
+
+                    <aside class="card card--dark">
+                        <div class="card__head">
+                            <div>
+                                <p class="eyebrow">Kadıköy havuz durumu</p>
+                                <h2 class="card__title">Hücre bazında tır kotası</h2>
+                            </div>
+                        </div>
+                        <ul class="zone-list" id="heroZones">
+                            <li class="muted">Yükleniyor…</li>
+                        </ul>
+                        <p class="note note--dark">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            Üye Bakkal ekranından verilen siparişler bu kotalara eklenir ve ilgili Depo Bakkalın teslimat listesine düşer.
+                        </p>
+                    </aside>
+                </div>
+            </div>
+
+            <div class="container section">
+                <div class="section__head">
+                    <p class="eyebrow">Nasıl çalışır</p>
+                    <h2>Üç adımda Gel-Al modeli</h2>
+                    <p>Toplam lojistik maliyetinin yaklaşık %53'ünü oluşturan son kilometre teslimatı modelden çıkarılır.</p>
+                </div>
+                <div class="steps">
+                    <article class="step">
+                        <span class="step__num">1</span>
+                        <h3>Dijital havuzda sipariş</h3>
+                        <p>Hücredeki bakkallar uygulamadan koli seçer ve ödemeyi peşin olarak ortak havuza yapar. Siparişler birleşerek 1.000 kolilik tır kotasını doldurur.</p>
+                        <p class="step__foot">Aracı payı: %0</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__num step__num--amber">2</span>
+                        <h3>Fabrikadan Depo Bakkala</h3>
+                        <p>Üretici 40 bakkalı tek tek gezmek yerine paletleri Depo Bakkalın 12–15 m² boş ardiyesine bırakır. Kolilerin dağıtımı yaklaşık 4 saat içinde tamamlanır.</p>
+                        <p class="step__foot">Hücre başına durak sayısı: 40 yerine 1</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__num step__num--emerald">3</span>
+                        <h3>QR kod ile teslim alma</h3>
+                        <p>Üye bakkalın telefonuna bir teslimat kodu ve QR gelir. Bakkal kolilerini kendi aracıyla depodan alır; Depo Bakkal kodu okutarak teslimatı onaylar.</p>
+                        <p class="step__foot">Kargo ücreti: yok</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="container section">
+                <div class="panel">
+                    <div class="panel__head">
+                        <div>
+                            <p class="eyebrow eyebrow--light">Ekonomik model</p>
+                            <h2>Birim maliyet karşılaştırması</h2>
+                            <p>Geleneksel distribütör zinciri ile EsnafB2B hücre modelinin birim maliyet endeksi (geleneksel = 100).</p>
+                        </div>
+                        <div class="panel__total">
+                            <span>Geleneksel: 100,0</span>
+                            <strong>EsnafB2B: <span id="costTotalEsnaf">80,7</span></strong>
+                            <span class="pill pill--emerald">−%<span data-bind="saving">19,3</span></span>
+                        </div>
+                    </div>
+
+                    <div class="panel__body">
+                        <div>
+                            <div class="table-wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Maliyet kalemi</th>
+                                            <th>Geleneksel</th>
+                                            <th>EsnafB2B</th>
+                                            <th>Açıklama</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="costTableBody">
+                                        <tr><td colspan="4" class="muted">Yükleniyor…</td></tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Toplam birim maliyet</td>
+                                            <td>100,0</td>
+                                            <td id="costTotalEsnafCell">80,7</td>
+                                            <td>%<span data-bind="saving">19,3</span> net tasarruf</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <p class="small muted">Tasarruf oranları pilot öncesi hedef değerlerdir; 1.000 koli üzerindeki hacimlerde %21,5'e kadar çıkması öngörülmektedir.</p>
+
+                            <div class="calc calc--amber">
+                                <div class="calc__head">
+                                    <div>
+                                        <p class="eyebrow eyebrow--amber">Depo Bakkal hesaplayıcı</p>
+                                        <h3>Depo Bakkal olursam ayda ne kazanırım?</h3>
+                                    </div>
+                                    <button class="btn btn--amber btn--sm" type="button" data-open="depotApplyModal">Depo Bakkal başvurusu</button>
+                                </div>
+                                <label class="calc__row" for="depotVolumeSlider">
+                                    <span>Hücredeki 40 bakkalın aylık toplam sipariş hacmi</span>
+                                    <strong id="depotVolumeLabel">3.200.000 TL</strong>
+                                </label>
+                                <input type="range" id="depotVolumeSlider" min="1000000" max="8000000" step="200000" value="3200000">
+                                <p class="calc__result">
+                                    Stok riski olmadan, yalnızca boş deponuzu kullandırarak aylık komisyon:
+                                    <strong id="depotMonthlyEarning">48.000 TL</strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="calc">
+                            <p class="eyebrow">Üye bakkal hesaplayıcı</p>
+                            <h3>Bakkalınızın tahmini tasarrufu</h3>
+                            <label class="calc__row" for="calcMonthlySpend">
+                                <span>Aylık toptan alım tutarı</span>
+                                <strong id="calcMonthlySpendLabel">150.000 TL</strong>
+                            </label>
+                            <input type="range" id="calcMonthlySpend" min="30000" max="500000" step="10000" value="150000">
+
+                            <label class="calc__row" for="calcBoxVolume">
+                                <span>Hücrenin toplam sipariş hacmi</span>
+                                <strong id="calcBoxVolumeLabel">1.000 koli</strong>
+                            </label>
+                            <input type="range" id="calcBoxVolume" min="400" max="2500" step="100" value="1000">
+                            <div class="range-legend"><span>400</span><span>1.000 (tır kotası)</span><span>2.500</span></div>
+
+                            <div class="result-row">
+                                <div>
+                                    <span class="small muted">Uygulanan tasarruf oranı</span>
+                                    <span class="small" id="calcBonusStatus">Standart tır kotası</span>
+                                </div>
+                                <strong class="result-row__value" id="calcDiscountRate">%19,3</strong>
+                            </div>
+                            <div class="result-grid">
+                                <div class="result result--emerald">
+                                    <span>Aylık tahmini tasarruf</span>
+                                    <strong id="calcMonthlySaving">28.950 TL</strong>
+                                </div>
+                                <div class="result result--dark">
+                                    <span>Yıllık tahmini tasarruf</span>
+                                    <strong id="calcAnnualSaving">347.400 TL</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container section">
+                <div class="section__head">
+                    <p class="eyebrow">Neden 40 bakkal?</p>
+                    <h2>Tüm Türkiye yerine modüler hücre</h2>
+                </div>
+                <div class="facts">
+                    <div class="fact"><strong>1.000 koli ÷ 40</strong><span>Toplu alım iskontosu için gereken 1.000 koli, 40 bakkala bölündüğünde bakkal başına haftada yaklaşık 25 koliye denk gelir.</span></div>
+                    <div class="fact"><strong>8–15 palet</strong><span>Bir hücrenin haftalık yükü Depo Bakkalın 12–15 m²'lik ardiyesine sığar ve aynı gün dağıtılır.</span></div>
+                    <div class="fact"><strong>Esnek rota</strong><span>Bir hücre 400–500 koli sipariş verse bile tır, ilçedeki 4 Depo Bakkala uğrayarak tek seferde dağıtım yapar.</span></div>
+                    <div class="fact"><strong>Ortak havuz</strong><span>Ödemeler sipariş anında havuzda toplanır; tek bir bakkalın 1.000 koliyi peşin finanse etmesi gerekmez.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 2. ÜYE BAKKAL ============ -->
+        <section id="view-bakkal" class="view" hidden>
+            <div class="container section">
+                <div class="view-head">
+                    <span class="view-head__icon c-bg-emerald"><svg class="icon"><use href="#i-smartphone"/></svg></span>
+                    <div>
+                        <h2>Üye Bakkal uygulaması</h2>
+                        <p class="muted">Ortak havuza koli ekleyin, siparişi onaylayın ve Gel-Al QR kodunuzu alın.</p>
+                    </div>
+                </div>
+
+                <div class="app-grid">
+                    <div class="phone">
+                        <div class="phone__screen">
+                            <div class="phone__head">
+                                <div class="field">
+                                    <label for="appZoneSelect">Hücre ve Depo Bakkal</label>
+                                    <select id="appZoneSelect"></select>
+                                </div>
+                                <div class="field">
+                                    <label for="appGrocerSelect">Üye bakkal</label>
+                                    <select id="appGrocerSelect"></select>
+                                </div>
+                                <div class="quota">
+                                    <div class="quota__row">
+                                        <span><svg class="icon"><use href="#i-truck"/></svg> <span id="quotaTitle">Tır kotası</span></span>
+                                        <strong id="quotaCount">– / 1000 koli</strong>
+                                    </div>
+                                    <div class="bar"><div class="bar__fill" id="quotaBar" style="width:0%"></div></div>
+                                    <p class="quota__note" id="quotaNote"></p>
+                                </div>
+                            </div>
+
+                            <div class="phone__catalog" id="appCatalog">
+                                <p class="muted">Ürünler yükleniyor…</p>
+                            </div>
+
+                            <div class="phone__checkout">
+                                <div class="checkout-row">
+                                    <span>Seçilen: <strong id="appCartBoxes">0 koli</strong> · Tasarruf: <strong class="c-emerald" id="appCartSavings">0 TL</strong></span>
+                                    <span class="checkout-row__totals">
+                                        <s id="appCartOldTotal">0 TL</s>
+                                        <strong id="appCartNewTotal">0 TL</strong>
+                                    </span>
+                                </div>
+                                <button class="btn btn--emerald btn--block" id="btnPlaceOrder" type="button">
+                                    <svg class="icon"><use href="#i-qr-code"/></svg> Havuz ödemesini onayla ve QR oluştur
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stack">
+                        <div class="card pass">
+                            <div class="pass__head">
+                                <div>
+                                    <p class="eyebrow eyebrow--light">Gel-Al teslimat fişi</p>
+                                    <h3>Depo teslimat kartı</h3>
+                                </div>
+                                <svg class="icon icon--lg"><use href="#i-qr-code"/></svg>
+                            </div>
+                            <div class="pass__body" id="passEmpty">
+                                <p class="muted">Henüz sipariş oluşturulmadı. Sipariş onaylandığında teslimat kodunuz ve QR kodunuz burada görünür.</p>
+                            </div>
+                            <div class="pass__body" id="passFilled" hidden>
+                                <div class="pass__qr-row">
+                                    <img id="passQr" class="pass__qr" alt="Teslimat QR kodu" width="132" height="132">
+                                    <div>
+                                        <span class="small muted">Teslimat kodu</span>
+                                        <div class="pass__code" id="passCode"></div>
+                                        <div class="small c-sky" id="passDepot"></div>
+                                        <div class="small c-emerald"><svg class="icon"><use href="#i-clock"/></svg> Depodan kendi aracınızla teslim alabilirsiniz.</div>
+                                    </div>
+                                </div>
+                                <dl class="kv">
+                                    <div><dt>Alıcı üye bakkal</dt><dd id="passGrocer"></dd></div>
+                                    <div><dt>Koli sayısı</dt><dd id="passBoxes"></dd></div>
+                                    <div><dt>Havuz ödeme tutarı</dt><dd id="passTotal"></dd></div>
+                                    <div class="c-emerald"><dt>Geleneksel fiyata göre fark</dt><dd id="passSaved"></dd></div>
+                                </dl>
+                                <button class="btn btn--amber btn--block" data-view="depo" type="button">
+                                    <svg class="icon"><use href="#i-warehouse"/></svg> Depo Bakkal paneline geç
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card card--dark">
+                            <h4 class="c-sky">Neden Gel-Al?</h4>
+                            <p class="small">
+                                Kendi kargo ve kamyonet filosunu kuran B2B girişimlerinde operasyon maliyeti hızla artar.
+                                Bu modelde tır yalnızca hücredeki Depo Bakkala uğrar; üye bakkallar kolilerini yakındaki depodan kendileri alır.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 3. DEPO BAKKAL ============ -->
+        <section id="view-depo" class="view" hidden>
+            <div class="container section stack">
+                <div class="banner banner--amber">
+                    <div>
+                        <div class="field field--inline">
+                            <label for="depotZoneSelect"><svg class="icon"><use href="#i-warehouse"/></svg> Depo Bakkal</label>
+                            <select id="depotZoneSelect"></select>
+                        </div>
+                        <h2>Depo Bakkal yönetim paneli</h2>
+                        <p>Boş ardiye alanınızı hücrenin toplu alım noktası olarak kullandırın, gelen üye bakkalların teslimat kodunu doğrulayın ve teslim edilen siparişlerden %1,5 komisyon alın.</p>
+                    </div>
+                    <button class="btn btn--light" type="button" data-open="depotApplyModal">Depo Bakkal başvuru formu</button>
+                </div>
+
+                <div class="kpis">
+                    <div class="kpi"><span>Hücre sipariş hacmi</span><strong id="kpiVolume">–</strong><small>Teslim edilen ve bekleyen siparişler</small></div>
+                    <div class="kpi kpi--emerald"><span>Kazanılan komisyon (%1,5)</span><strong id="kpiCommission">–</strong><small>Teslim edilen siparişlerden</small></div>
+                    <div class="kpi"><span>Bekleyen teslimat</span><strong class="c-amber" id="kpiPending">–</strong><small>Teslim alınmayı bekleyen sipariş</small></div>
+                    <div class="kpi"><span>Depo alanı</span><strong>12–15 m²</strong><small>8–15 palet kapasite</small></div>
+                </div>
+
+                <div class="card">
+                    <form class="code-form" id="codeForm">
+                        <label for="codeInput"><svg class="icon"><use href="#i-scan-line"/></svg> Teslimat kodu</label>
+                        <input id="codeInput" name="code" placeholder="EB2B-XXXXXX" autocomplete="off" spellcheck="false" maxlength="11" required>
+                        <button class="btn btn--emerald" type="submit">Kodu doğrula</button>
+                        <p class="small muted">Üye bakkalın QR kodunu telefon kamerasıyla okuttuğunuzda bu ekran sipariş seçili olarak açılır.</p>
+                    </form>
+                </div>
+
+                <div class="card card--flush">
+                    <div class="card__head card__head--pad">
+                        <div>
+                            <h3>Teslimat listesi</h3>
+                            <p class="small muted">Üye bakkal teslim almaya geldiğinde kodunu doğrulayın ve teslimatı onaylayın.</p>
+                        </div>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Teslimat kodu</th>
+                                    <th>Üye bakkal</th>
+                                    <th>Koli</th>
+                                    <th>Sipariş tutarı</th>
+                                    <th>Komisyon</th>
+                                    <th>Durum</th>
+                                    <th class="t-right">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="depotQueueBody">
+                                <tr><td colspan="7" class="muted">Yükleniyor…</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ 4. ÜRETİCİ ============ -->
+        <section id="view-uretici" class="view" hidden>
+            <div class="container section stack">
+                <div class="banner banner--dark">
+                    <div>
+                        <p class="eyebrow eyebrow--light">Üretici veri panosu</p>
+                        <h2>Bölgesel sevkiyat ve talep görünümü</h2>
+                        <p>Üretici, Kadıköy'deki 160 bakkalı tek tek dolaşmak yerine 4 Depo Bakkala palet bırakır ve hücre bazında hangi ürünlerin talep gördüğünü izler.</p>
+                        <p class="small topbar__demo">Temsili demo verisi. Markalar örnek amaçlıdır; herhangi bir üretici ile iş birliği bulunduğunu göstermez.</p>
+                    </div>
+                    <div class="field">
+                        <label for="brandFilter">Marka filtresi</label>
+                        <select id="brandFilter">
+                            <option value="">Tüm markalar</option>
+                            <option>Ülker</option>
+                            <option>Eti</option>
+                            <option>Coca-Cola</option>
+                            <option>Sırma</option>
+                            <option>Çaykur</option>
+                            <option>Biryağ</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="kpis">
+                    <div class="kpi"><span>Durak sayısı (Kadıköy)</span><strong class="c-indigo">160 → 4</strong><small>Hücre başına %97,5 daha az durak</small></div>
+                    <div class="kpi"><span>Havuzdaki koli</span><strong id="mfgTotalBoxes">–</strong><small>Peşin ödenmiş siparişler</small></div>
+                    <div class="kpi"><span>Depoda bekleme süresi</span><strong class="c-sky">≤ 4 saat</strong><small>Hedeflenen dağıtım süresi</small></div>
+                    <div class="kpi"><span>Seçili markanın kolisi</span><strong id="mfgBrandBoxes">–</strong><small>Demo siparişlerine göre</small></div>
+                </div>
+
+                <div class="card">
+                    <div class="card__head">
+                        <div>
+                            <h3>Kadıköy hücreleri</h3>
+                            <p class="small muted">Hücre bazında tır kotası doluluğu ve en çok sipariş edilen markalar.</p>
+                        </div>
+                    </div>
+                    <div class="zone-grid" id="mfgZones"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Teslimat onayı -->
+    <div class="modal" id="confirmModal" hidden>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+            <div class="modal__head modal__head--dark">
+                <h3 id="confirmTitle"><svg class="icon"><use href="#i-package-check"/></svg> Teslimatı onayla</h3>
+                <button class="icon-btn" type="button" data-close aria-label="Kapat"><svg class="icon"><use href="#i-x"/></svg></button>
+            </div>
+            <div class="modal__body">
+                <div class="scan-box">
+                    <svg class="icon icon--xl"><use href="#i-qr-code"/></svg>
+                    <span class="scan-box__code" id="confirmCode"></span>
+                </div>
+                <h4 id="confirmGrocer"></h4>
+                <p class="small muted" id="confirmDetails"></p>
+                <p class="small c-amber" id="confirmWarning" hidden></p>
+                <button class="btn btn--emerald btn--block" type="button" id="btnConfirmDeliver">
+                    <svg class="icon"><use href="#i-circle-check"/></svg> Kolileri teslim et ve komisyonu kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Depo Bakkal başvurusu -->
+    <div class="modal" id="depotApplyModal" hidden>
+        <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="applyTitle">
+            <div class="modal__head modal__head--amber">
+                <h3 id="applyTitle">Depo Bakkal başvuru formu</h3>
+                <button class="icon-btn" type="button" data-close aria-label="Kapat"><svg class="icon"><use href="#i-x"/></svg></button>
+            </div>
+            <form class="modal__body form" id="depotApplyForm">
+                <p class="small">Dükkanınızda en az 12 m² boş depo, bodrum veya ardiye alanı varsa hücrenizin Depo Bakkalı olabilir ve teslim edilen siparişlerden %1,5 komisyon alabilirsiniz.</p>
+                <div class="form__grid">
+                    <div class="field">
+                        <label for="applyShop">Bakkal / market adı</label>
+                        <input id="applyShop" name="shop_name" required minlength="2" maxlength="120" placeholder="Örn. Acıbadem Çınar Bakkal">
+                    </div>
+                    <div class="field">
+                        <label for="applyDistrict">İlçe ve mahalle</label>
+                        <input id="applyDistrict" name="district" required minlength="2" maxlength="120" placeholder="Örn. Kadıköy / Acıbadem">
+                    </div>
+                    <div class="field">
+                        <label for="applyStorage">Boş depo alanı (m²)</label>
+                        <input id="applyStorage" name="storage_m2" type="number" required min="12" max="10000" placeholder="12">
+                    </div>
+                    <div class="field">
+                        <label for="applyTruck">Araç yanaşma durumu</label>
+                        <select id="applyTruck" name="truck_access">
+                            <option>Ana cadde üzeri (tır uygun)</option>
+                            <option>Geniş sokak (kamyon / palet uygun)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form__actions">
+                    <button class="btn btn--muted" type="button" data-close>İptal</button>
+                    <button class="btn btn--amber" type="submit">Başvuruyu gönder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+        <svg class="icon c-emerald"><use href="#i-circle-check"/></svg>
+        <div>
+            <strong id="toastTitle"></strong>
+            <p id="toastMessage"></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer__inner">
+            <span><strong>EsnafB2B v6.0</strong> · Bölgesel Depo Bakkal ve Dijital Kooperatif Modeli</span>
+            <span>Pilot: Atatürk Fen Lisesi ve Kadıköy · 2026–2027 · Demo sürüm, gerçek ödeme alınmaz.</span>
+        </div>
+    </footer>
+
+    <script src="/js/app.js" defer></script>
+</body>
+</html>
